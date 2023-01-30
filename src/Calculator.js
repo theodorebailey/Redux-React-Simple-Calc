@@ -3,7 +3,10 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import {useState} from 'react'
+import {useState} from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { increment, decrement } from './redux/counter';
 
 const Calculator = () => {
 
@@ -69,6 +72,9 @@ const [num,setNum] = useState(0);
     // window.location.reload();
   }
 
+  const dispatch = useDispatch();
+  const { value } = useSelector((state) => state.counter);
+
 
 
   return (
@@ -83,7 +89,7 @@ const [num,setNum] = useState(0);
         </div>
         <div className='total_amount_card'>
           <div className='card_text '>
-          <h3 className='total_amount_heading'>{savings}</h3>
+          <h3 className='total_amount_heading'>{value}</h3>
           <p className='total_amount_para'>Total savings</p>
           </div>
         </div>
@@ -104,8 +110,8 @@ const [num,setNum] = useState(0);
         </div>
         <div className='button_collection'>
           <Stack spacing={2} direction="row">       
-          <Button className='btn_one' onClick={handleWithdraw} style={{backgroundColor: 'black'}} variant="contained">Withdraw</Button>
-          <Button className='btn_one' onClick={handleDeposit}  style={{backgroundColor: 'black'}} variant="contained">Deposit</Button>
+          <Button className='btn_one' onClick={() => dispatch(increment())} style={{backgroundColor: 'black'}} variant="contained">Withdraw</Button>
+          <Button className='btn_one' onClick={() => dispatch(decrement())}  style={{backgroundColor: 'black'}} variant="contained">Deposit</Button>
           <Button className='btn_one'  onClick={handleInterest}  variant="outlined">Add Interest: 5%</Button>
           <Button className='btn_one'  onClick={handleCharges}  variant="outlined">Charges: 15%</Button>
           </Stack>

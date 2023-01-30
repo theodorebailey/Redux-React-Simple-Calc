@@ -6,11 +6,13 @@ import { decrement, increment } from "./store/counter";
 
 // import { Provider } from 'react-redux';
 
+// With redux, we require a store - created to pass in to top level component to provide every component below access to it
+// 
+
 function App() {
   return (
     <div className="App">
       <Calculator />
-      
     </div>
   );
 }
